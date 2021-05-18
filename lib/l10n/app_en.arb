@@ -1,0 +1,66 @@
+{
+    "languageName": "English",
+    "@languageName": {
+        "description": "The name of this language"
+    },
+
+    "settingsPage": "Settings",
+    "@settingsPage": {
+        "description": "Title of the Settings page of the app"
+    },
+    "notePage": "Note",
+    "@notePage": {
+        "description": "Title of the page to add a new note"
+    },
+    "mindMe": "MIND ME",
+    "@mindMe": {
+        "description": "App Name"
+    },
+
+    "dayMon": "Mon",
+    "@dayMon": {
+        "description": "Monday"
+    },
+    "dayTue": "Tue",
+    "@dayTue": {
+        "description": "Tuesday"
+    },
+    "dayWed": "Wed",
+    "@dayWed": {
+        "description": "Wednesday"
+    },
+    "dayThu": "Thu",
+    "@dayThu": {
+        "description": "Thursday"
+    },
+    "dayFri": "Fri",
+    "@dayFri": {
+        "description": "Friday"
+    },
+    "daySat": "Sat",
+    "@daySat": {
+        "description": "Saturday"
+    },
+    "daySun": "Sun",
+    "@daySun": {
+        "description": "Sunday"
+    },
+
+    "notificationRandom": "Random",
+    "@notificationRandom": {
+        "description": "Random notification"
+    },
+    "notificationWeekday": "Weekdays",
+    "@notificationWeekday": {
+        "description": "Weekdays"
+    },
+    "notificationWeekend": "Weekends",
+    "@notificationWeekend": {
+        "description": "Weekends"
+    },
+    "notificationEveryday": "Everyday",
+    "@notificationEveryday": {
+        "description": "Everyday"
+    }
+
+}

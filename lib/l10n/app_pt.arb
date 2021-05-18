@@ -1,0 +1,21 @@
+{
+    "languageName": "Português",
+
+    "settingsPage": "Configurações",
+    "notePage": "Lembrete",
+    "mindMe": "MIND ME",
+
+    "dayMon": "Seg",
+    "dayTue": "Ter",
+    "dayWed": "Qua",
+    "dayThu": "Qui",
+    "dayFri": "Sex",
+    "daySat": "Sab",
+    "daySun": "Dom",
+
+    "notificationRandom": "Aleatório",
+    "notificationWeekday": "Dias de Semana",
+    "notificationWeekend": "Finais de Semana",
+    "notificationEveryday": "Todos os Dias"
+
+}

@@ -1,4 +1,4 @@
-package com.example.mind_me
+package com.phcs.mind_me
 
 import io.flutter.embedding.android.FlutterActivity
 
