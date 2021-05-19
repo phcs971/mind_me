@@ -3,9 +3,12 @@ import 'dart:io';
 import 'package:carbon_icons/carbon_icons.dart';
 import 'package:day_night_time_picker/lib/constants.dart';
 import 'package:day_night_time_picker/lib/daynight_timepicker.dart';
+import 'package:extended_masked_text/extended_masked_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mind_me/src/service/service.dart';
+import 'package:mind_me/src/stores/notes.store.dart';
+import 'package:mind_me/src/widgets/confirm.dialog.dart';
 import 'package:mind_me/src/widgets/list_tile_field.widget.dart';
 
 import '../../utils.dart';
@@ -22,6 +25,7 @@ class NotePage extends StatefulWidget {
 
 class _NotePageState extends State<NotePage> {
   final nav = Get.find<NavigationService>();
+  final store = Get.find<NotesStore>();
   final formKey = GlobalKey<FormState>();
 
   late NoteModel note;
@@ -37,6 +41,18 @@ class _NotePageState extends State<NotePage> {
   save() {
     if (formKey.currentState!.validate()) {
       formKey.currentState!.save();
+      if (note.lock) {
+        note.resetNotification();
+        if (note.localAuth) note.resetPassCode();
+      } else {
+        note.resetLock();
+        if (note.randomNotification) note.resetSpecificNotification();
+      }
+      if (store.has(note))
+        store.update(note);
+      else
+        store.add(note);
+      nav.pop();
     }
   }
 
@@ -66,6 +82,7 @@ class _NotePageState extends State<NotePage> {
             inputFormatters: [MaxLinesInputFormatter(width > 160 ? 5 : 4)],
             autovalidateMode: AutovalidateMode.onUserInteraction,
             onChanged: (value) {
+              note.title = value;
               final r = !isNull(value);
               if (r != hasText)
                 WidgetsBinding.instance!.addPostFrameCallback((_) => setState(() => hasText = r));
@@ -146,7 +163,42 @@ class _NotePageState extends State<NotePage> {
     }
 
     Widget _buildCode() {
-      return Container();
+      final border = OutlineInputBorder(
+        borderRadius: BorderRadius.circular(4),
+        borderSide: BorderSide(),
+      );
+      return ListTileField<String>(
+        title: MindMeTexts.fourDigitCode.tr,
+        initialValue: note.passCode,
+        onSaved: (value) => note.passCode = value?.replaceAll("-", ""),
+        builder: (FormFieldState<dynamic> state) {
+          final controller = MaskedTextController(mask: "0-0-0-0", text: state.value);
+          return Container(
+            width: 100,
+            height: 32,
+            child: TextFormField(
+              controller: controller,
+              keyboardType: TextInputType.number,
+              onChanged: (v) {
+                if (v.replaceAll("-", "").length > 4) return;
+                state.didChange(v);
+              },
+              textAlignVertical: TextAlignVertical.center,
+              textAlign: TextAlign.center,
+              decoration: InputDecoration(
+                border: border,
+                hintText: "0-0-0-0",
+                contentPadding: EdgeInsets.zero,
+                errorBorder: border,
+                enabledBorder: border,
+                focusedBorder: border,
+                disabledBorder: border,
+                focusedErrorBorder: border,
+              ),
+            ),
+          );
+        },
+      );
     }
 
     Future<TimeOfDay> _selectTime(TimeOfDay currentTime) async {
@@ -155,7 +207,6 @@ class _NotePageState extends State<NotePage> {
         value: time,
         onChange: (v) => time = v,
         is24HrFormat: ['pt'].contains(Get.locale),
-        // is24HrFormat: true,
         cancelText: MindMeTexts.cancel.tr,
         okText: MindMeTexts.ok.tr,
         borderRadius: 32,
@@ -173,6 +224,7 @@ class _NotePageState extends State<NotePage> {
             title: MindMeTexts.notifyAt.tr,
             initialValue: note.time,
             onTap: (state) async => state.didChange(await _selectTime(state.value!)),
+            onSaved: (value) => note.time = value ?? note.time,
             builder: (state) {
               return Container(
                 height: 32,
@@ -212,64 +264,76 @@ class _NotePageState extends State<NotePage> {
       );
     }
 
-    return Scaffold(
-      appBar: AppBarWidget(title: MindMeTexts.notePage.tr, returnArrow: true),
-      body: Form(
-        key: formKey,
-        child: SingleChildScrollView(
-          physics: BouncingScrollPhysics(),
-          padding: EdgeInsets.symmetric(vertical: 12),
-          child: Column(
-            children: [
-              _buildNote(),
-              _buildColor(),
-              SwitchListTileField(
-                title: MindMeTexts.lockByPass.tr,
-                initialValue: note.lock,
-                onChanged: (value) => setState(() => note.lock = value),
-              ),
-              if (note.lock) ...[
+    return WillPopScope(
+      onWillPop: () async {
+        return await ConfirmDialog(
+          title: MindMeTexts.sureLeavePage.tr,
+          subtitle: MindMeTexts.loseChanges.tr,
+        ).show();
+      },
+      child: Scaffold(
+        appBar: AppBarWidget(title: MindMeTexts.notePage.tr, returnArrow: true),
+        body: Form(
+          key: formKey,
+          child: SingleChildScrollView(
+            physics: BouncingScrollPhysics(),
+            padding: EdgeInsets.symmetric(vertical: 12),
+            child: Column(
+              children: [
+                _buildNote(),
+                _buildColor(),
                 SwitchListTileField(
-                  title: MindMeTexts.localAuth.tr,
-                  initialValue: note.localAuth,
-                  onChanged: (value) => setState(() => note.localAuth = value),
+                  key: ValueKey("1"),
+                  title: MindMeTexts.lockByPass.tr,
+                  initialValue: note.lock,
+                  onChanged: (value) => setState(() => note.lock = value),
                 ),
-                if (!note.localAuth) _buildCode(),
-              ] else ...[
-                SwitchListTileField(
-                  title: MindMeTexts.sendNotification.tr,
-                  initialValue: note.notify,
-                  onChanged: (value) => setState(() => note.notify = value),
-                ),
-                if (note.notify) ...[
+                if (note.lock) ...[
                   SwitchListTileField(
-                    title: MindMeTexts.randomNotification.tr,
-                    initialValue: note.randomNotification,
-                    onChanged: (value) => setState(() => note.randomNotification = value),
+                    key: ValueKey("2"),
+                    title: MindMeTexts.localAuth.tr,
+                    initialValue: note.localAuth,
+                    onChanged: (value) => setState(() => note.localAuth = value),
                   ),
-                  if (!note.randomNotification) _buildNotificationDate(),
+                  if (!note.localAuth) _buildCode(),
+                ] else ...[
+                  SwitchListTileField(
+                    key: ValueKey("3"),
+                    title: MindMeTexts.sendNotification.tr,
+                    initialValue: note.notify,
+                    onChanged: (value) => setState(() => note.notify = value),
+                  ),
+                  if (note.notify) ...[
+                    SwitchListTileField(
+                      key: ValueKey("4"),
+                      title: MindMeTexts.randomNotification.tr,
+                      initialValue: note.randomNotification,
+                      onChanged: (value) => setState(() => note.randomNotification = value),
+                    ),
+                    if (!note.randomNotification) _buildNotificationDate(),
+                  ]
                 ]
-              ]
-            ],
+              ],
+            ),
           ),
         ),
-      ),
-      bottomNavigationBar: AnimatedContainer(
-        duration: Duration(milliseconds: 250),
-        curve: Curves.easeOut,
-        height: 72 + Get.mediaQuery.padding.bottom + MediaQuery.of(context).viewInsets.bottom,
-        width: double.infinity,
-        padding: EdgeInsets.fromLTRB(24, 12, 24,
-            12 + Get.mediaQuery.padding.bottom + MediaQuery.of(context).viewInsets.bottom),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          boxShadow: [BoxShadow(blurRadius: 2, offset: Offset(0, -1), color: Colors.black26)],
-        ),
-        child: ButtonWidget(
-          text: "SALVAR",
-          onPressed: save,
-          active: hasText,
-          deactiveColor: Colors.grey,
+        bottomNavigationBar: AnimatedContainer(
+          duration: Duration(milliseconds: 250),
+          curve: Curves.easeOut,
+          height: 72 + Get.mediaQuery.padding.bottom + MediaQuery.of(context).viewInsets.bottom,
+          width: double.infinity,
+          padding: EdgeInsets.fromLTRB(24, 12, 24,
+              12 + Get.mediaQuery.padding.bottom + MediaQuery.of(context).viewInsets.bottom),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            boxShadow: [BoxShadow(blurRadius: 2, offset: Offset(0, -1), color: Colors.black26)],
+          ),
+          child: ButtonWidget(
+            text: "SALVAR",
+            onPressed: save,
+            active: hasText,
+            deactiveColor: Colors.grey,
+          ),
         ),
       ),
     );

@@ -16,8 +16,6 @@ class HomePage extends StatelessWidget {
   final store = Get.find<NotesStore>();
   @override
   Widget build(BuildContext context) {
-    store.getNotes();
-
     _buildOnDrag(Widget child) => Material(
           child: Container(
             child: child,

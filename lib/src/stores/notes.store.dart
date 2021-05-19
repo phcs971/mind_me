@@ -16,6 +16,8 @@ abstract class _NotesStoreBase with Store {
   @action
   void reoorder(int old, int index) => notes.insert(index, notes.removeAt(old));
 
+  bool has(NoteModel note) => notes.any((n) => n.id == note.id);
+
   @action
   Future<bool> getNotes() async {
     notes.clear();
@@ -39,7 +41,24 @@ abstract class _NotesStoreBase with Store {
   }
 
   @action
-  Future<bool> deleteNote(NoteModel note) async {
+  Future<bool> add(NoteModel note) async {
+    notes.add(note);
+    return true;
+  }
+
+  @action
+  Future<bool> update(NoteModel note) async {
+    if (!has(note)) return false;
+    final currentNote = notes.firstWhere((n) => n.id == note.id);
+    final index = notes.indexOf(currentNote);
+    notes.removeAt(index);
+    notes.insert(index, note);
+    // notes[notes.indexWhere((n) => n.id == note.id)] = note;
+    return true;
+  }
+
+  @action
+  Future<bool> delete(NoteModel note) async {
     return notes.remove(note);
   }
 }

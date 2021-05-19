@@ -40,7 +40,7 @@ class NavigationService {
     log.i("<Router> Pop Page");
     closeSnack();
     if (canPop()) {
-      navigatorKey.currentState!.pop(result);
+      navigatorKey.currentState!.maybePop(result);
     } else {
       navigatorKey.currentState!.pushReplacementNamed(MindMePages.Home, result: result);
     }

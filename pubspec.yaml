@@ -16,6 +16,7 @@ dependencies:
   carbon_icons: ^0.0.1+2
   cupertino_icons: ^1.0.2
   day_night_time_picker: ^1.0.2
+  extended_masked_text: ^2.2.0
   flutter_mobx: ^2.0.0
   flutter_svg: ^0.22.0
   get: ^4.1.4

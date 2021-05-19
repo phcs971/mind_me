@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:carbon_icons/carbon_icons.dart';
 import 'package:get/get.dart';
+import 'package:mind_me/src/widgets/confirm.dialog.dart';
 
 import '../service/service.dart';
 import '../stores/notes.store.dart';
@@ -183,9 +184,13 @@ class NoteDialog extends StatelessWidget {
                   icon: Icon(CarbonIcons.delete),
                   iconSize: 48,
                   onPressed: () async {
-                    nav.pop();
-                    //TODO Confirmar delete
-                    await store.deleteNote(note);
+                    if (await ConfirmDialog(
+                      title: MindMeTexts.sureDeleteThis.tr,
+                      subtitle: MindMeTexts.noComingBack.tr,
+                    ).show()) {
+                      await store.delete(note);
+                      nav.pop();
+                    }
                   },
                 ),
               ),

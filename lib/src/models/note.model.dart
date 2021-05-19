@@ -22,7 +22,7 @@ class NoteModel {
     if (notify) {
       String date;
       if (randomNotification)
-        date = MindMeTexts.notificationRandom.tr;
+        return MindMeTexts.notificationRandom.tr;
       else if (dates.every((i) => i))
         date = MindMeTexts.notificationEveryday.tr;
       else if (dates[0] && dates[6])
@@ -38,6 +38,50 @@ class NoteModel {
       if (!isNull(date)) return "${time.format(Get.context!)} - $date";
     }
     return "";
+  }
+
+  resetNotification() {
+    notify = false;
+    randomNotification = false;
+    resetSpecificNotification();
+  }
+
+  resetSpecificNotification() {
+    time = TimeOfDay(hour: 0, minute: 0);
+    for (var i = 0; i < dates.length; i++) dates[i] = false;
+  }
+
+  resetLock() {
+    lock = false;
+    localAuth = false;
+    resetPassCode();
+  }
+
+  resetPassCode() {
+    passCode = null;
+  }
+
+  @override
+  String toString() {
+    return """
+
+${"-=" * 15}-
+Lembrete -> $id
+"$title"
+Color: $color
+${"-" * 31}
+Lock: $lock
+LocalAuth: $localAuth
+PassCode: $passCode
+${"-" * 31}
+Notifitcation: $notify
+AtRandom: $randomNotification
+Time: ${time.format(Get.context!)}
+Dates: ${List<String>.generate(7, (i) => dates[i] ? datesString[i].tr : "").where((i) => !isNull(i)).toList().join("/")}
+${"-" * 31}
+NotificationText: $notificationText
+${"-=" * 15}-
+    """;
   }
 }
 

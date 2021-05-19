@@ -79,7 +79,13 @@ class MindMeTexts extends Translations {
   static const sendNotification = "sendNotification";
   static const randomNotification = "randomNotification";
   static const notifyAt = "notifyAt";
-
+  //-> ConfirmDialog
+  static const sureLeavePage = "sureLeavePage";
+  static const loseChanges = "loseChanges";
+  static const noComingBack = "noComingBack";
+  static const sureDeleteEverything = "sureDeleteEverything";
+  static const sureDeleteThis = "sureDeleteThis";
+  static const sureDeleteNotification = "sureDeleteNotification";
   @override
   Map<String, Map<String, String>> get keys => {
         'en': {
@@ -105,7 +111,7 @@ class MindMeTexts extends Translations {
           notificationWeekday: "Weekdays",
           notificationWeekend: "Weekends",
           notificationEveryday: "Everyday",
-          //->Add Note
+          //-> Add Note
           writeHereNoteHint: "Write here your note...",
           requiredValue: "This item is required!",
           noteColor: "Note Color",
@@ -116,6 +122,13 @@ class MindMeTexts extends Translations {
           sendNotification: "Send Notifications",
           randomNotification: "Random Notifications",
           notifyAt: "Notify at",
+          //-> Confirm Dialog
+          sureLeavePage: "Are you sure you want to leave this page?",
+          loseChanges: "You will lose all the changes you made!",
+          noComingBack: "There is no coming back from this!",
+          sureDeleteEverything: "Are you sure you want to delete everything?",
+          sureDeleteThis: "Are you sure you want to delete this notes?",
+          sureDeleteNotification: "Are you sure you want to remove all notifications?",
         },
         'pt': {
           languageName: "Português",
@@ -151,6 +164,13 @@ class MindMeTexts extends Translations {
           sendNotification: "Enviar Notificações",
           randomNotification: "Notificações Aleatórias",
           notifyAt: "Notificar em",
+          //-> Confirm Dialog
+          sureLeavePage: "Você tem certeza que deseja sair dessa página?",
+          loseChanges: "Você perdera todas as mudanças feitas!",
+          noComingBack: "Não tem como desfazer essa ação!",
+          sureDeleteEverything: "Você tem certeza que deseja deletar tudo?",
+          sureDeleteThis: "Você tem certeza que deseja deletar esse lembrete?",
+          sureDeleteNotification: "Você tem certeza que deseja remover todas notificações?",
         }
       };
 }

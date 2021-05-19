@@ -46,11 +46,25 @@ mixin _$NotesStore on _NotesStoreBase, Store {
     return _$getNotesAsyncAction.run(() => super.getNotes());
   }
 
-  final _$deleteNoteAsyncAction = AsyncAction('_NotesStoreBase.deleteNote');
+  final _$addAsyncAction = AsyncAction('_NotesStoreBase.add');
 
   @override
-  Future<bool> deleteNote(NoteModel note) {
-    return _$deleteNoteAsyncAction.run(() => super.deleteNote(note));
+  Future<bool> add(NoteModel note) {
+    return _$addAsyncAction.run(() => super.add(note));
+  }
+
+  final _$updateAsyncAction = AsyncAction('_NotesStoreBase.update');
+
+  @override
+  Future<bool> update(NoteModel note) {
+    return _$updateAsyncAction.run(() => super.update(note));
+  }
+
+  final _$deleteAsyncAction = AsyncAction('_NotesStoreBase.delete');
+
+  @override
+  Future<bool> delete(NoteModel note) {
+    return _$deleteAsyncAction.run(() => super.delete(note));
   }
 
   final _$_NotesStoreBaseActionController =
