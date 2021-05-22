@@ -3,13 +3,22 @@ import 'package:flutter/material.dart';
 import '../../service/service.dart';
 import '../../utils.dart';
 
-class StartupPage extends StatelessWidget {
+class StartupPage extends StatefulWidget {
   const StartupPage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    WidgetsBinding.instance?.addPostFrameCallback((_) => Get.find<StartupService>().start());
+  _StartupPageState createState() => _StartupPageState();
+}
 
+class _StartupPageState extends State<StartupPage> {
+  @override
+  void initState() {
+    Get.find<StartupService>().start();
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       body: Stack(

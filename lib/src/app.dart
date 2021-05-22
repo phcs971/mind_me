@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:carbon_icons/carbon_icons.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -33,10 +34,19 @@ class MindMeApp extends StatelessWidget {
           primaryColor: MindMeColors.yellow,
           accentColor: MindMeColors.orange,
           fontFamily: MindMeStyles.fontFamily,
+          appBarTheme: AppBarTheme(
+            backgroundColor: Colors.white,
+            titleTextStyle: MindMeStyles.title,
+          ),
         ),
         locale: Locale(Platform.localeName.split("_").first),
         fallbackLocale: Locale('en'),
       ),
     );
   }
+}
+
+extension CarbonBackButtonIcon on BackButtonIcon {
+  // @override
+  Widget build(BuildContext context) => Icon(CarbonIcons.chevron_left);
 }

@@ -15,6 +15,17 @@ class NoteWidget extends StatelessWidget {
 
   static double get size => (Get.width - 48) / 2;
 
+  static Widget fake() {
+    return Container(
+      height: size,
+      width: size,
+      decoration: BoxDecoration(
+        boxShadow: [BoxShadow(offset: Offset(4, 4), blurRadius: 4, color: Colors.black26)],
+        color: Colors.grey,
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     String obscure(String value) {
@@ -172,9 +183,7 @@ class NoteDialog extends StatelessWidget {
                 child: IconButton(
                   icon: Icon(CarbonIcons.edit),
                   iconSize: 48,
-                  onPressed: () => nav
-                    ..pop()
-                    ..push(MindMePages.Note, note),
+                  onPressed: () => nav.pushReplacement(MindMePages.Note, arguments: note),
                 ),
               ),
               Positioned(

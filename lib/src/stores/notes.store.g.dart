@@ -39,6 +39,21 @@ mixin _$NotesStore on _NotesStoreBase, Store {
     });
   }
 
+  final _$readErrorAtom = Atom(name: '_NotesStoreBase.readError');
+
+  @override
+  bool get readError {
+    _$readErrorAtom.reportRead();
+    return super.readError;
+  }
+
+  @override
+  set readError(bool value) {
+    _$readErrorAtom.reportWrite(value, super.readError, () {
+      super.readError = value;
+    });
+  }
+
   final _$getNotesAsyncAction = AsyncAction('_NotesStoreBase.getNotes');
 
   @override
@@ -53,6 +68,15 @@ mixin _$NotesStore on _NotesStoreBase, Store {
     return _$addAsyncAction.run(() => super.add(note));
   }
 
+  final _$setAllNotificationsAsyncAction =
+      AsyncAction('_NotesStoreBase.setAllNotifications');
+
+  @override
+  Future<bool> setAllNotifications() {
+    return _$setAllNotificationsAsyncAction
+        .run(() => super.setAllNotifications());
+  }
+
   final _$updateAsyncAction = AsyncAction('_NotesStoreBase.update');
 
   @override
@@ -65,6 +89,22 @@ mixin _$NotesStore on _NotesStoreBase, Store {
   @override
   Future<bool> delete(NoteModel note) {
     return _$deleteAsyncAction.run(() => super.delete(note));
+  }
+
+  final _$deleteNotificationsAsyncAction =
+      AsyncAction('_NotesStoreBase.deleteNotifications');
+
+  @override
+  Future<bool> deleteNotifications() {
+    return _$deleteNotificationsAsyncAction
+        .run(() => super.deleteNotifications());
+  }
+
+  final _$deleteAllAsyncAction = AsyncAction('_NotesStoreBase.deleteAll');
+
+  @override
+  Future<bool> deleteAll() {
+    return _$deleteAllAsyncAction.run(() => super.deleteAll());
   }
 
   final _$_NotesStoreBaseActionController =
@@ -85,7 +125,8 @@ mixin _$NotesStore on _NotesStoreBase, Store {
   String toString() {
     return '''
 busy: ${busy},
-notes: ${notes}
+notes: ${notes},
+readError: ${readError}
     ''';
   }
 }

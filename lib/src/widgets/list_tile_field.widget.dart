@@ -29,10 +29,12 @@ class ListTileField<T> extends StatelessWidget {
       validator: validator,
       autovalidateMode: AutovalidateMode.onUserInteraction,
       builder: (state) => ListTile(
-        onTap: () {
-          FocusScope.of(context).requestFocus(new FocusNode());
-          if (onTap != null) onTap!(state);
-        },
+        onTap: onTap != null
+            ? () {
+                FocusScope.of(context).requestFocus(new FocusNode());
+                onTap!(state);
+              }
+            : null,
         minVerticalPadding: 0,
         contentPadding: EdgeInsets.fromLTRB(24, 0, 24, 0),
         title: Text(title, style: MindMeStyles.body1),

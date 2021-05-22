@@ -9,5 +9,7 @@ class MindMeColors {
   static const purple = const Color(0xFFC97DFF);
   static const blue = const Color(0xFF7A9CEA);
   static const green = const Color(0xFFA8CF6C);
+
+  static const darkYellow = const Color(0xFFf4b039);
   static const successGreen = CupertinoColors.systemGreen;
 }

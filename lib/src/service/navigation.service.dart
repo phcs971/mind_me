@@ -46,6 +46,16 @@ class NavigationService {
     }
   }
 
+  void forcePop([dynamic result]) {
+    log.i("<Router> Pop Page");
+    closeSnack();
+    if (canPop()) {
+      navigatorKey.currentState!.pop(result);
+    } else {
+      navigatorKey.currentState!.pushReplacementNamed(MindMePages.Home, result: result);
+    }
+  }
+
   void closeSnack() {
     if (Get.isSnackbarOpen ?? false) navigatorKey.currentState!.pop();
   }

@@ -46,13 +46,13 @@ class _NotePageState extends State<NotePage> {
         if (note.localAuth) note.resetPassCode();
       } else {
         note.resetLock();
-        if (note.randomNotification) note.resetSpecificNotification();
+        if (note.randomNotification) note.randomizeNotification();
       }
       if (store.has(note))
         store.update(note);
       else
         store.add(note);
-      nav.pop();
+      nav.forcePop();
     }
   }
 
@@ -74,7 +74,7 @@ class _NotePageState extends State<NotePage> {
           child: TextFormField(
             textAlignVertical: TextAlignVertical.center,
             textAlign: TextAlign.center,
-            style: MindMeStyles.body1,
+            style: MindMeStyles.title,
             keyboardType: TextInputType.multiline,
             maxLines: 5,
             minLines: 1,
@@ -206,12 +206,14 @@ class _NotePageState extends State<NotePage> {
       final picker = showPicker(
         value: time,
         onChange: (v) => time = v,
-        is24HrFormat: ['pt'].contains(Get.locale),
+        is24HrFormat: ['pt'].contains(Get.locale?.languageCode),
         cancelText: MindMeTexts.cancel.tr,
         okText: MindMeTexts.ok.tr,
         borderRadius: 32,
         iosStylePicker: Platform.isIOS,
-        minuteInterval: MinuteInterval.FIVE,
+        minuteInterval: MinuteInterval.ONE,
+        hourLabel: MindMeTexts.hours.tr,
+        minuteLabel: MindMeTexts.minutes.tr,
       );
       await nav.navigatorKey.currentState!.push(picker);
       return time;
@@ -351,9 +353,9 @@ class MaxLinesInputFormatter extends TextInputFormatter {
       textAlign: TextAlign.center,
       text: TextSpan(
         text: newValue.text,
-        style: MindMeStyles.body1,
+        style: MindMeStyles.title,
       ),
-    )..layout(maxWidth: (Get.size.width - 48) / 2 - 33);
+    )..layout(maxWidth: (Get.size.width - 48) / 2 - 32 - 8);
     return tp.didExceedMaxLines ? oldValue : newValue;
   }
 }

@@ -47,10 +47,12 @@ class MindMeStyles {
 
 class MindMeTexts extends Translations {
   static const languageName = "languageName";
+  static const goBack = "goBack";
   static const cancel = "cancel";
   static const ok = "ok";
   static const hours = "hours";
   static const minutes = "minutes";
+  //->
   //-> Pages
   static const settingsPage = "settingsPage";
   static const notePage = "notePage";
@@ -63,7 +65,7 @@ class MindMeTexts extends Translations {
   static const dayFri = "dayFri";
   static const daySat = "daySat";
   static const daySun = "daySun";
-  //-> Notifications
+  //-> NotificationsText
   static const notificationRandom = "notificationRandom";
   static const notificationWeekday = "notificationWeekday";
   static const notificationWeekend = "notificationWeekend";
@@ -86,10 +88,32 @@ class MindMeTexts extends Translations {
   static const sureDeleteEverything = "sureDeleteEverything";
   static const sureDeleteThis = "sureDeleteThis";
   static const sureDeleteNotification = "sureDeleteNotification";
+  //-> Error
+  static const oops = "oops";
+  static const somethingWentWrong = "somethingWentWrong";
+  static const tryAgain = "tryAgain";
+  static const clickTryAgain = "clickTryAgain";
+  static const couldNotRemove = "couldNotRemove";
+  static const couldNotAdd = "couldNotAdd";
+  static const couldNotUpdate = "couldNotUpdate";
+  //-> Home Page
+  static const hello = "hello";
+  static const noNotes = "noNotes";
+  static const clickToAdd = "clickToAdd";
+  //-> Config Page
+  static const configNotificationActive = "configNotificationActive";
+  static const language = "language";
+  static const aboutTheApp = "aboutTheApp";
+  static const speakWithUs = "speakWithUs";
+  static const buyMeACoffee = "buyMeACoffee";
+  static const removeNextNotification = "removeNextNotification";
+  static const removeEverything = "removeEverything";
+
   @override
   Map<String, Map<String, String>> get keys => {
         'en': {
           languageName: "English",
+          goBack: "Back",
           cancel: "Cancel",
           ok: "Ok",
           hours: "Hours",
@@ -106,7 +130,7 @@ class MindMeTexts extends Translations {
           dayFri: "Fri",
           daySat: "Sat",
           daySun: "Sun",
-          //-> Notifications
+          //-> NotificationsText
           notificationRandom: "Random",
           notificationWeekday: "Weekdays",
           notificationWeekend: "Weekends",
@@ -129,9 +153,30 @@ class MindMeTexts extends Translations {
           sureDeleteEverything: "Are you sure you want to delete everything?",
           sureDeleteThis: "Are you sure you want to delete this notes?",
           sureDeleteNotification: "Are you sure you want to remove all notifications?",
+          //-> Error
+          oops: "Oops!",
+          somethingWentWrong: "Something went wrong!",
+          tryAgain: "TRY AGAIN",
+          clickTryAgain: "Click Here to Try Again!",
+          couldNotRemove: "Couldn't remove this note.",
+          couldNotAdd: "Couldn't create this note.",
+          couldNotUpdate: "Couldn't update this note.",
+          //-> Home Page
+          hello: "Hello!",
+          noNotes: "It looks like you don't have any notes yet!",
+          clickToAdd: "Tap the + button to create a new one.",
+          //-> Config Page
+          configNotificationActive: "Send Notifications",
+          language: "Language",
+          aboutTheApp: "About the App",
+          speakWithUs: "Contact Me",
+          buyMeACoffee: "Buy me a Coffee",
+          removeNextNotification: "REMOVE NEXT NOTIFICATIONS",
+          removeEverything: "DELETE EVERYTHING",
         },
         'pt': {
           languageName: "Português",
+          goBack: "Voltar",
           cancel: "Cancelar",
           ok: "Confirmar",
           hours: "Horas",
@@ -148,12 +193,12 @@ class MindMeTexts extends Translations {
           dayFri: "Sex",
           daySat: "Sab",
           daySun: "Dom",
-          //-> Notifications
+          //-> NotificationsText
           notificationRandom: "Aleatório",
           notificationWeekday: "Dias de Semana",
           notificationWeekend: "Finais de Semana",
           notificationEveryday: "Todos os Dias",
-          //->Add Note
+          //-> Add Note
           writeHereNoteHint: "Escreva aqui seu lembrete...",
           requiredValue: "Este item é obrigatório!",
           noteColor: "Cor do Lembrete",
@@ -171,6 +216,26 @@ class MindMeTexts extends Translations {
           sureDeleteEverything: "Você tem certeza que deseja deletar tudo?",
           sureDeleteThis: "Você tem certeza que deseja deletar esse lembrete?",
           sureDeleteNotification: "Você tem certeza que deseja remover todas notificações?",
+          //-> Error
+          oops: "Opa!",
+          somethingWentWrong: "Alguma coisa deu errado!",
+          tryAgain: "TENTAR",
+          clickTryAgain: "Clique Aqui para Tentar Novamente!",
+          couldNotRemove: "Não foi possível remover esse lembrete.",
+          couldNotAdd: "Não foi possível criar esse lembrete.",
+          couldNotUpdate: "Não foi possível atualizar esse lembrete.",
+          //-> Home Page
+          hello: "Olá!",
+          noNotes: "Parece que você ainda não tem nenhum lembrete!",
+          clickToAdd: "Clique no botão + para criar um novo.",
+          //-> Config Page
+          configNotificationActive: "Enviar Notificações",
+          language: "Linguagem",
+          aboutTheApp: "Sobre o App",
+          speakWithUs: "Fale Comigo",
+          buyMeACoffee: "Me compre um café",
+          removeNextNotification: "REMOVER PRÓXIMAS NOTIFICAÇÕES",
+          removeEverything: "APAGAR TUDO",
         }
       };
 }

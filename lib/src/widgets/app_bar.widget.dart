@@ -24,12 +24,13 @@ class AppBarWidget extends StatelessWidget with PreferredSizeWidget {
       iconTheme: IconThemeData(color: Colors.black),
       centerTitle: true,
       actions: actions,
-      title: Text(title, style: MindMeStyles.title),
+      title: Text(title, style: MindMeStyles.title.copyWith(fontWeight: FontWeight.w400)),
       backgroundColor: Colors.white,
       leading: leading != null
           ? leading
           : returnArrow
               ? IconButton(
+                  tooltip: MindMeTexts.goBack.tr,
                   icon: Icon(CarbonIcons.chevron_left),
                   onPressed: nav.pop,
                 )

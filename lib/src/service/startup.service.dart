@@ -1,14 +1,29 @@
 import 'package:get/get.dart';
-import 'package:mind_me/src/stores/notes.store.dart';
-import 'package:mind_me/src/utils.dart';
-import 'navigation.service.dart';
+
+import 'service.dart';
+import '../stores/config.store.dart';
+import '../stores/notes.store.dart';
+import '../utils.dart';
 
 class StartupService {
+  bool started = false;
+
   final nav = Get.find<NavigationService>();
   final store = Get.find<NotesStore>();
+  final config = Get.find<ConfigStore>();
+  final notification = Get.find<NotificationService>();
+
   Future start() async {
-    await Future.delayed(Duration(milliseconds: 500));
-    await store.getNotes();
-    nav.pushReplacement(MindMePages.Home);
+    if (!started) {
+      try {
+        started = true;
+        await config.init();
+        await store.getNotes();
+        await notification.init();
+      } catch (e) {
+        started = false;
+      }
+    }
+    nav.pushAsFirst(MindMePages.Home);
   }
 }
