@@ -1,5 +1,6 @@
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_native_timezone/flutter_native_timezone.dart';
+import 'package:mind_me/src/widgets/snackbar.widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:timezone/data/latest.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
@@ -29,8 +30,10 @@ class NotificationService {
     if (payload == null) return;
     await Get.find<StartupService>().start();
     final note = Get.find<NotesStore>().byId(payload);
-    if (note != null) NoteDialog(note).open();
-    // else //TODO SNACK
+    if (note != null)
+      NoteDialog(note).open();
+    else
+      SnackbarWidget.error(MindMeTexts.baseError.tr);
   }
 
   Future<List<int>?> create(NoteModel note) async {

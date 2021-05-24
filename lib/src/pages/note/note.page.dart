@@ -27,6 +27,7 @@ class _NotePageState extends State<NotePage> {
   final nav = Get.find<NavigationService>();
   final store = Get.find<NotesStore>();
   final formKey = GlobalKey<FormState>();
+  final auth = Get.find<AuthService>();
 
   late NoteModel note;
   bool isFirstBuild = true;
@@ -34,6 +35,7 @@ class _NotePageState extends State<NotePage> {
 
   void onFirstBuild(NoteModel? args) {
     note = args ?? NoteModel();
+    if (!auth.enabled) note.localAuth = false;
     hasText = !isNull(note.title);
     isFirstBuild = false;
   }
@@ -41,6 +43,7 @@ class _NotePageState extends State<NotePage> {
   save() {
     if (formKey.currentState!.validate()) {
       formKey.currentState!.save();
+      if (!auth.enabled) note.localAuth = false;
       if (note.lock) {
         note.resetNotification();
         if (note.localAuth) note.resetPassCode();
@@ -171,6 +174,11 @@ class _NotePageState extends State<NotePage> {
         title: MindMeTexts.fourDigitCode.tr,
         initialValue: note.passCode,
         onSaved: (value) => note.passCode = value?.replaceAll("-", ""),
+        validator: (value) {
+          if (isNull(value) || value!.replaceAll("-", "").length != 4)
+            return MindMeTexts.authIncompleteCode.tr;
+          return null;
+        },
         builder: (FormFieldState<dynamic> state) {
           final controller = MaskedTextController(mask: "0-0-0-0", text: state.value);
           return Container(
@@ -291,12 +299,13 @@ class _NotePageState extends State<NotePage> {
                   onChanged: (value) => setState(() => note.lock = value),
                 ),
                 if (note.lock) ...[
-                  SwitchListTileField(
-                    key: ValueKey("2"),
-                    title: MindMeTexts.localAuth.tr,
-                    initialValue: note.localAuth,
-                    onChanged: (value) => setState(() => note.localAuth = value),
-                  ),
+                  if (auth.enabled)
+                    SwitchListTileField(
+                      key: ValueKey("2"),
+                      title: MindMeTexts.localAuth.tr,
+                      initialValue: note.localAuth,
+                      onChanged: (value) => setState(() => note.localAuth = value),
+                    ),
                   if (!note.localAuth) _buildCode(),
                 ] else ...[
                   SwitchListTileField(

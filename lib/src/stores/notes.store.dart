@@ -1,3 +1,4 @@
+import 'package:mind_me/src/widgets/snackbar.widget.dart';
 import 'package:mobx/mobx.dart';
 
 import '../utils.dart';
@@ -60,6 +61,7 @@ abstract class _NotesStoreBase with Store {
       return true;
     } catch (e) {
       log.e("<Notes> Add Note Error $e");
+      SnackbarWidget.error(MindMeTexts.baseError.tr);
       return false;
     }
   }
@@ -78,6 +80,7 @@ abstract class _NotesStoreBase with Store {
       return true;
     } catch (e) {
       log.e("<Notes> Set Notifications Error $e");
+      SnackbarWidget.error(MindMeTexts.baseError.tr);
       return false;
     }
   }
@@ -100,6 +103,7 @@ abstract class _NotesStoreBase with Store {
       return true;
     } catch (e) {
       log.e("<Notes> Update Note ${note.id} Error $e");
+      SnackbarWidget.error(MindMeTexts.baseError.tr);
       return false;
     }
   }
@@ -115,6 +119,7 @@ abstract class _NotesStoreBase with Store {
       return true;
     } catch (e) {
       log.e("<Notes> Delete Note ${note.id} Error $e");
+      SnackbarWidget.error(MindMeTexts.baseError.tr);
       return false;
     }
   }
@@ -137,6 +142,7 @@ abstract class _NotesStoreBase with Store {
       return true;
     } catch (e) {
       log.e("<Notes> Delete Notifications Error $e");
+      SnackbarWidget.error(MindMeTexts.baseError.tr);
       return false;
     }
   }
@@ -152,6 +158,7 @@ abstract class _NotesStoreBase with Store {
       return true;
     } catch (e) {
       log.e("<Notes> Delete All Error $e");
+      SnackbarWidget.error(MindMeTexts.baseError.tr);
       return false;
     }
   }

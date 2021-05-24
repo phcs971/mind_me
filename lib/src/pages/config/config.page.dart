@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
 import 'package:carbon_icons/carbon_icons.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:mind_me/src/stores/notes.store.dart';
 import 'package:mind_me/src/widgets/confirm.dialog.dart';
+import 'package:mind_me/src/widgets/snackbar.widget.dart';
 import 'package:package_info/package_info.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -127,7 +129,8 @@ class ConfigPage extends StatelessWidget {
                   log.e("<Config> Open BMC Error $e");
                 }
               },
-              builder: (_) => Icon(CarbonIcons.cafe, size: 32, color: Colors.black),
+              builder: (_) => SvgPicture.asset("assets/images/burger.svg",
+                  height: 32, width: 32, color: Colors.black),
             ),
             Padding(
               padding: EdgeInsets.fromLTRB(24, 12, 24, 12),
@@ -137,7 +140,8 @@ class ConfigPage extends StatelessWidget {
                     title: MindMeTexts.sureDeleteNotification.tr,
                     subtitle: MindMeTexts.noComingBack.tr,
                   ).show()) {
-                    await store.deleteNotifications(); // SNACK
+                    if (await store.deleteNotifications())
+                      SnackbarWidget.build(MindMeTexts.success.tr);
                   }
                 },
                 color: Colors.white,
@@ -154,7 +158,7 @@ class ConfigPage extends StatelessWidget {
                     title: MindMeTexts.sureDeleteEverything.tr,
                     subtitle: MindMeTexts.noComingBack.tr,
                   ).show()) {
-                    await store.deleteAll(); // SNACK
+                    if (await store.deleteAll()) SnackbarWidget.build(MindMeTexts.success.tr);
                   }
                 },
                 color: Colors.red,

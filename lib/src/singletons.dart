@@ -12,6 +12,8 @@ void initSingletons() {
   Get.put(ConfigStore());
   log.v("<Singletons> Register Notes Store");
   Get.put(NotesStore());
+  log.v("<Singletons> Register Auth Service");
+  Get.put(AuthService());
   log.v("<Singletons> Register Notification Service");
   Get.put(NotificationService());
   log.v("<Singletons> Register Startup Service");

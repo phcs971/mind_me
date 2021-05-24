@@ -9,6 +9,7 @@ class StartupService {
   bool started = false;
 
   final nav = Get.find<NavigationService>();
+  final auth = Get.find<AuthService>();
   final store = Get.find<NotesStore>();
   final config = Get.find<ConfigStore>();
   final notification = Get.find<NotificationService>();
@@ -17,6 +18,7 @@ class StartupService {
     if (!started) {
       try {
         started = true;
+        await auth.init();
         await config.init();
         await store.getNotes();
         await notification.init();

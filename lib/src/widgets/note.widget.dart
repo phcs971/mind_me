@@ -109,7 +109,8 @@ class NoteDialog extends StatelessWidget {
 
   static double get size => Get.width - 48;
   Future<T?> open<T>() async {
-    return await showDialog<T>(context: Get.context!, builder: build);
+    if (await Get.find<AuthService>().auth(note))
+      return await showDialog<T>(context: Get.context!, builder: build);
   }
 
   @override

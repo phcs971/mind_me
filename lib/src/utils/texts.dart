@@ -52,7 +52,7 @@ class MindMeTexts extends Translations {
   static const ok = "ok";
   static const hours = "hours";
   static const minutes = "minutes";
-  //->
+  static const success = "success";
   //-> Pages
   static const settingsPage = "settingsPage";
   static const notePage = "notePage";
@@ -89,6 +89,7 @@ class MindMeTexts extends Translations {
   static const sureDeleteThis = "sureDeleteThis";
   static const sureDeleteNotification = "sureDeleteNotification";
   //-> Error
+  static const baseError = "baseError";
   static const oops = "oops";
   static const somethingWentWrong = "somethingWentWrong";
   static const tryAgain = "tryAgain";
@@ -108,6 +109,14 @@ class MindMeTexts extends Translations {
   static const buyMeACoffee = "buyMeACoffee";
   static const removeNextNotification = "removeNextNotification";
   static const removeEverything = "removeEverything";
+  //-> Auth
+  // static const authGoToSettingsIOS = "authGoToSettingsIOS";
+  // static const authGoToSettingsDescription = "authGoToSettingsDescription";
+  // static const authLockOut = "authLockOut";
+  static const authReason = "authReason";
+  static const authWriteYourCode = "authWriteYourCode";
+  static const authIncorrectCode = "authIncorrectCode";
+  static const authIncompleteCode = "authIncompleteCode";
 
   @override
   Map<String, Map<String, String>> get keys => {
@@ -118,6 +127,7 @@ class MindMeTexts extends Translations {
           ok: "Ok",
           hours: "Hours",
           minutes: "Minutes",
+          success: "Task Completed Successfully",
           //-> Pages
           settingsPage: "Settings",
           notePage: "Note",
@@ -154,6 +164,7 @@ class MindMeTexts extends Translations {
           sureDeleteThis: "Are you sure you want to delete this notes?",
           sureDeleteNotification: "Are you sure you want to remove all notifications?",
           //-> Error
+          baseError: "An error happened when doing this action!",
           oops: "Oops!",
           somethingWentWrong: "Something went wrong!",
           tryAgain: "TRY AGAIN",
@@ -170,9 +181,17 @@ class MindMeTexts extends Translations {
           language: "Language",
           aboutTheApp: "About the App",
           speakWithUs: "Contact Me",
-          buyMeACoffee: "Buy me a Coffee",
+          buyMeACoffee: "Buy me a Burger",
           removeNextNotification: "REMOVE NEXT NOTIFICATIONS",
           removeEverything: "DELETE EVERYTHING",
+          //-> Auth
+          // authGoToSettingsIOS: "Settings",
+          // authGoToSettingsDescription: "Please set up your authentication method",
+          // authLockOut: "Please reenable your authentication method",
+          authReason: "Please authenticate to see this note!",
+          authWriteYourCode: "Write the 4 digit code to open this note",
+          authIncorrectCode: "Incorrect Code",
+          authIncompleteCode: "Code must have 4 digits",
         },
         'pt': {
           languageName: "Português",
@@ -181,6 +200,7 @@ class MindMeTexts extends Translations {
           ok: "Confirmar",
           hours: "Horas",
           minutes: "Minutos",
+          success: "Operação realizada com sucesso!",
           //-> Pages
           settingsPage: "Configurações",
           notePage: "Lembrete",
@@ -217,6 +237,7 @@ class MindMeTexts extends Translations {
           sureDeleteThis: "Você tem certeza que deseja deletar esse lembrete?",
           sureDeleteNotification: "Você tem certeza que deseja remover todas notificações?",
           //-> Error
+          baseError: "Um erro aconteceu ao realizar essa ação!",
           oops: "Opa!",
           somethingWentWrong: "Alguma coisa deu errado!",
           tryAgain: "TENTAR",
@@ -233,9 +254,17 @@ class MindMeTexts extends Translations {
           language: "Linguagem",
           aboutTheApp: "Sobre o App",
           speakWithUs: "Fale Comigo",
-          buyMeACoffee: "Me compre um café",
+          buyMeACoffee: "Me compre um lanche",
           removeNextNotification: "REMOVER PRÓXIMAS NOTIFICAÇÕES",
           removeEverything: "APAGAR TUDO",
+          //-> Auth
+          // authGoToSettingsIOS: "Ajustes",
+          // authGoToSettingsDescription: "Por favor defina seu método de autenticação",
+          // authLockOut: "Por favor tente novamente",
+          authReason: "Por favor autentique-se para ver esse lembrete!",
+          authWriteYourCode: "Escreva o código de 4 digitos para ver esse lembrete",
+          authIncorrectCode: "Código Incorreto",
+          authIncompleteCode: "O código deve ter 4 digitos",
         }
       };
 }
