@@ -1,5 +1,6 @@
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_native_timezone/flutter_native_timezone.dart';
+import 'package:mind_me/src/stores/config.store.dart';
 import 'package:mind_me/src/widgets/snackbar.widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:timezone/data/latest.dart' as tz;
@@ -37,7 +38,7 @@ class NotificationService {
   }
 
   Future<List<int>?> create(NoteModel note) async {
-    if (!note.notify) return null;
+    if (!note.notify || !Get.find<ConfigStore>().sendNotifications) return null;
     try {
       final ids = <int>[];
       SharedPreferences prefs = await SharedPreferences.getInstance();

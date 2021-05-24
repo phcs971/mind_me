@@ -263,6 +263,7 @@ class _NotePageState extends State<NotePage> {
                     Checkbox(
                       value: note.dates[index],
                       activeColor: MindMeColors.successGreen,
+                      materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                       onChanged: (value) => setState(() => note.dates[index] = value ?? false),
                     )
                   ],

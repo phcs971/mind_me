@@ -132,6 +132,30 @@ class ConfigPage extends StatelessWidget {
               builder: (_) => SvgPicture.asset("assets/images/burger.svg",
                   height: 32, width: 32, color: Colors.black),
             ),
+            ListTileField(
+              title: MindMeTexts.privacyPolicy.tr,
+              onTap: (_) async {
+                try {
+                  log.i("<Config> Open Privacy");
+                  await launch("https://mind-me.flycricket.io/privacy.html");
+                } catch (e) {
+                  log.e("<Config> Open Privacy Error $e");
+                }
+              },
+              builder: (_) => Icon(CarbonIcons.security, size: 32, color: Colors.black),
+            ),
+            ListTileField(
+              title: MindMeTexts.termsAndConditions.tr,
+              onTap: (_) async {
+                try {
+                  log.i("<Config> Open Terms");
+                  await launch("https://mind-me.flycricket.io/terms.html");
+                } catch (e) {
+                  log.e("<Config> Open Terms Error $e");
+                }
+              },
+              builder: (_) => Icon(CarbonIcons.document, size: 32, color: Colors.black),
+            ),
             Padding(
               padding: EdgeInsets.fromLTRB(24, 12, 24, 12),
               child: ButtonWidget(
@@ -163,7 +187,6 @@ class ConfigPage extends StatelessWidget {
                 },
                 color: Colors.red,
                 borderColor: Colors.red,
-                // textColor: Colors.,
                 text: MindMeTexts.removeEverything.tr,
               ),
             ),

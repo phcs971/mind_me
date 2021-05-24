@@ -109,6 +109,8 @@ class MindMeTexts extends Translations {
   static const buyMeACoffee = "buyMeACoffee";
   static const removeNextNotification = "removeNextNotification";
   static const removeEverything = "removeEverything";
+  static const privacyPolicy = "privacyPolicy";
+  static const termsAndConditions = "termsAndConditions";
   //-> Auth
   // static const authGoToSettingsIOS = "authGoToSettingsIOS";
   // static const authGoToSettingsDescription = "authGoToSettingsDescription";
@@ -184,6 +186,8 @@ class MindMeTexts extends Translations {
           buyMeACoffee: "Buy me a Burger",
           removeNextNotification: "REMOVE NEXT NOTIFICATIONS",
           removeEverything: "DELETE EVERYTHING",
+          privacyPolicy: "Privacy Policy",
+          termsAndConditions: "Terms & Conditions",
           //-> Auth
           // authGoToSettingsIOS: "Settings",
           // authGoToSettingsDescription: "Please set up your authentication method",
@@ -257,6 +261,8 @@ class MindMeTexts extends Translations {
           buyMeACoffee: "Me compre um lanche",
           removeNextNotification: "REMOVER PRÓXIMAS NOTIFICAÇÕES",
           removeEverything: "APAGAR TUDO",
+          privacyPolicy: "Política de Privacidade",
+          termsAndConditions: "Termos de Uso",
           //-> Auth
           // authGoToSettingsIOS: "Ajustes",
           // authGoToSettingsDescription: "Por favor defina seu método de autenticação",

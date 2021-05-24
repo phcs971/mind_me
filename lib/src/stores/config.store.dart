@@ -17,14 +17,14 @@ abstract class _ConfigStoreBase with Store {
   String locale = Platform.localeName.split("_").first;
 
   @observable
-  bool sendNotifications = false;
+  bool sendNotifications = true;
 
   @action
   Future init() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     locale = prefs.getString("mind-me-locale") ?? Platform.localeName.split("_").first;
     Get.updateLocale(Locale(locale));
-    sendNotifications = prefs.getBool("mind-me-notifications") ?? false;
+    sendNotifications = prefs.getBool("mind-me-notifications") ?? true;
   }
 
   @action
