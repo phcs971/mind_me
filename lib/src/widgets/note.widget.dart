@@ -31,7 +31,7 @@ class NoteWidget extends StatelessWidget {
     String obscure(String value) {
       String result = "";
       value.split("").forEach((char) {
-        if (char == " ")
+        if ([" ", "\n"].contains(char))
           result += char;
         else
           result += "*";
@@ -58,7 +58,8 @@ class NoteWidget extends StatelessWidget {
                     child: Center(
                       child: Text(
                         note.lock ? obscure(note.title) : note.title,
-                        style: MindMeStyles.title,
+                        style: MindMeStyles.title.copyWith(fontWeight: FontWeight.w400),
+                        overflow: TextOverflow.fade,
                         textAlign: TextAlign.center,
                       ),
                     ),
@@ -135,33 +136,34 @@ class NoteDialog extends StatelessWidget {
               Column(
                 children: [
                   Expanded(
-                    child: Padding(
-                      padding: EdgeInsets.fromLTRB(32, 16, 32, 4),
+                    child: SingleChildScrollView(
+                      padding: EdgeInsets.fromLTRB(48, 48, 48, 4),
                       child: Center(
                         child: Text(
                           note.title,
-                          style: MindMeStyles.title.copyWith(fontSize: 38),
+                          style: MindMeStyles.title
+                              .copyWith(fontSize: 24, fontWeight: FontWeight.w400),
                           textAlign: TextAlign.center,
                         ),
                       ),
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.fromLTRB(16, 8, 16, 8),
-                    height: 32,
-                    width: size - 32,
+                    margin: EdgeInsets.fromLTRB(12, 8, 12, 8),
+                    height: 24,
+                    width: size - 24,
                     child: note.notify
                         ? RichText(
                             textAlign: TextAlign.center,
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                             text: TextSpan(
-                              style: MindMeStyles.caption.copyWith(height: 7 / 6, fontSize: 24),
+                              style: MindMeStyles.caption.copyWith(height: 7 / 6, fontSize: 18),
                               children: [
                                 WidgetSpan(
                                   child: Padding(
                                     padding: const EdgeInsets.only(right: 4),
-                                    child: Icon(CarbonIcons.timer, size: 28),
+                                    child: Icon(CarbonIcons.timer, size: 21),
                                   ),
                                 ),
                                 TextSpan(text: note.notificationText),
@@ -176,14 +178,14 @@ class NoteDialog extends StatelessWidget {
                 Positioned(
                   right: 8,
                   bottom: 8,
-                  child: Icon(CarbonIcons.unlocked, size: 48),
+                  child: Icon(CarbonIcons.unlocked, size: 24),
                 ),
               Positioned(
                 right: 8,
                 top: 8,
                 child: IconButton(
                   icon: Icon(CarbonIcons.edit),
-                  iconSize: 48,
+                  iconSize: 24,
                   onPressed: () => nav.pushReplacement(MindMePages.Note, arguments: note),
                 ),
               ),
@@ -192,7 +194,7 @@ class NoteDialog extends StatelessWidget {
                 top: 8,
                 child: IconButton(
                   icon: Icon(CarbonIcons.delete),
-                  iconSize: 48,
+                  iconSize: 24,
                   onPressed: () async {
                     if (await ConfirmDialog(
                       title: MindMeTexts.sureDeleteThis.tr,

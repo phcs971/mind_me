@@ -7,7 +7,7 @@ class ButtonWidget extends StatelessWidget {
   final Color? borderColor, deactiveColor;
   final String text;
   final void Function() onPressed;
-  final double? height, width;
+  final double? width;
   final bool active;
 
   const ButtonWidget(
@@ -15,7 +15,6 @@ class ButtonWidget extends StatelessWidget {
       required this.text,
       required this.onPressed,
       this.active = true,
-      this.height = 48,
       this.width,
       this.deactiveColor,
       this.color = MindMeColors.successGreen,
@@ -32,7 +31,7 @@ class ButtonWidget extends StatelessWidget {
           if (states.contains(MaterialState.disabled)) return deactiveColor ?? color;
           return color;
         }),
-        padding: MaterialStateProperty.all(EdgeInsets.zero),
+        padding: MaterialStateProperty.all(EdgeInsets.all(16)),
         elevation: MaterialStateProperty.all(0),
         shape: MaterialStateProperty.all(
           RoundedRectangleBorder(
@@ -42,11 +41,12 @@ class ButtonWidget extends StatelessWidget {
         ),
       ),
       child: Container(
-        height: height,
         width: width,
         alignment: Alignment.center,
         child: Text(
           text,
+          textAlign: TextAlign.center,
+          overflow: TextOverflow.fade,
           style: MindMeStyles.subtitle1.copyWith(color: textColor, height: 1),
         ),
       ),

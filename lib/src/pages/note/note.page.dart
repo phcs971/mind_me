@@ -77,12 +77,11 @@ class _NotePageState extends State<NotePage> {
           child: TextFormField(
             textAlignVertical: TextAlignVertical.center,
             textAlign: TextAlign.center,
-            style: MindMeStyles.title,
+            style: MindMeStyles.title.copyWith(fontWeight: FontWeight.w400),
             keyboardType: TextInputType.multiline,
             maxLines: 5,
             minLines: 1,
             initialValue: note.title,
-            inputFormatters: [MaxLinesInputFormatter(width > 160 ? 5 : 4)],
             autovalidateMode: AutovalidateMode.onUserInteraction,
             onChanged: (value) {
               note.title = value;
@@ -184,24 +183,27 @@ class _NotePageState extends State<NotePage> {
           return Container(
             width: 100,
             height: 32,
-            child: TextFormField(
-              controller: controller,
-              keyboardType: TextInputType.number,
-              onChanged: (v) {
-                if (v.replaceAll("-", "").length > 4) return;
-                state.didChange(v);
-              },
-              textAlignVertical: TextAlignVertical.center,
-              textAlign: TextAlign.center,
-              decoration: InputDecoration(
-                border: border,
-                hintText: "0-0-0-0",
-                contentPadding: EdgeInsets.zero,
-                errorBorder: border,
-                enabledBorder: border,
-                focusedBorder: border,
-                disabledBorder: border,
-                focusedErrorBorder: border,
+            child: MediaQuery(
+              data: MediaQuery.of(context).copyWith(textScaleFactor: 1),
+              child: TextFormField(
+                controller: controller,
+                keyboardType: TextInputType.number,
+                onChanged: (v) {
+                  if (v.replaceAll("-", "").length > 4) return;
+                  state.didChange(v);
+                },
+                textAlignVertical: TextAlignVertical.center,
+                textAlign: TextAlign.center,
+                decoration: InputDecoration(
+                  border: border,
+                  hintText: "0-0-0-0",
+                  contentPadding: EdgeInsets.symmetric(horizontal: 4),
+                  errorBorder: border,
+                  enabledBorder: border,
+                  focusedBorder: border,
+                  disabledBorder: border,
+                  focusedErrorBorder: border,
+                ),
               ),
             ),
           );
@@ -349,23 +351,5 @@ class _NotePageState extends State<NotePage> {
         ),
       ),
     );
-  }
-}
-
-class MaxLinesInputFormatter extends TextInputFormatter {
-  final int maxLines;
-  MaxLinesInputFormatter(this.maxLines);
-  @override
-  TextEditingValue formatEditUpdate(TextEditingValue oldValue, TextEditingValue newValue) {
-    final tp = TextPainter(
-      maxLines: maxLines,
-      textDirection: TextDirection.ltr,
-      textAlign: TextAlign.center,
-      text: TextSpan(
-        text: newValue.text,
-        style: MindMeStyles.title,
-      ),
-    )..layout(maxWidth: (Get.size.width - 48) / 2 - 32 - 8);
-    return tp.didExceedMaxLines ? oldValue : newValue;
   }
 }

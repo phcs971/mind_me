@@ -20,6 +20,10 @@ abstract class _NotesStoreBase with Store {
   @action
   void reoorder(int old, int index) {
     notes.insert(index, notes.removeAt(old));
+    resetOrder();
+  }
+
+  void resetOrder() {
     for (var i = 0; i < notes.length; i++) notes[i].index = i;
     DatabaseService.instance.updateAll(notes);
   }
@@ -57,6 +61,7 @@ abstract class _NotesStoreBase with Store {
       if (note.notify) note.notificationIds = await notificationService.create(note);
       await DatabaseService.instance.create(note);
       notes.add(note);
+      resetOrder();
       log.i("<Notes> Add Note Success");
       return true;
     } catch (e) {
@@ -115,6 +120,7 @@ abstract class _NotesStoreBase with Store {
       await DatabaseService.instance.delete(note.id);
       if (note.notificationIds != null) await notificationService.remove(note.notificationIds!);
       notes.remove(note);
+      resetOrder();
       log.i("<Notes> Delete Note ${note.id} Success");
       return true;
     } catch (e) {

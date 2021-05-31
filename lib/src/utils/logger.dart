@@ -1,6 +1,13 @@
 part of '../utils.dart';
 
-final log = Logger(printer: CustomPrinter(), level: Level.verbose);
+final log = Logger(printer: CustomPrinter(), level: Level.verbose, filter: CustomFilter());
+
+class CustomFilter extends LogFilter {
+  @override
+  bool shouldLog(LogEvent event) => true;
+}
+
+String logText = "";
 
 class CustomPrinter extends LogPrinter {
   @override
@@ -23,6 +30,7 @@ class CustomPrinter extends LogPrinter {
           Level.wtf: "[WTF!]",
         }[event.level] ??
         "[VERB]";
+    logText += '$prefix ${event.message}\n';
     return [color('$prefix ${event.message}')];
   }
 }

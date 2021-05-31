@@ -118,6 +118,7 @@ class MindMeTexts extends Translations {
   static const authReason = "authReason";
   static const authWriteYourCode = "authWriteYourCode";
   static const authIncorrectCode = "authIncorrectCode";
+  static const authUnabled = "authUnabled";
   static const authIncompleteCode = "authIncompleteCode";
 
   @override
@@ -184,7 +185,7 @@ class MindMeTexts extends Translations {
           aboutTheApp: "About the App",
           speakWithUs: "Contact Me",
           buyMeACoffee: "Buy me a Burger",
-          removeNextNotification: "REMOVE NEXT NOTIFICATIONS",
+          removeNextNotification: "REMOVE NOTIFICATIONS",
           removeEverything: "DELETE EVERYTHING",
           privacyPolicy: "Privacy Policy",
           termsAndConditions: "Terms & Conditions",
@@ -195,6 +196,7 @@ class MindMeTexts extends Translations {
           authReason: "Please authenticate to see this note!",
           authWriteYourCode: "Write the 4 digit code to open this note",
           authIncorrectCode: "Incorrect Code",
+          authUnabled: "Unable to Authenticate",
           authIncompleteCode: "Code must have 4 digits",
         },
         'pt': {
@@ -258,8 +260,8 @@ class MindMeTexts extends Translations {
           language: "Linguagem",
           aboutTheApp: "Sobre o App",
           speakWithUs: "Fale Comigo",
-          buyMeACoffee: "Me compre um lanche",
-          removeNextNotification: "REMOVER PRÓXIMAS NOTIFICAÇÕES",
+          buyMeACoffee: "Me compre um hamburguer",
+          removeNextNotification: "REMOVER NOTIFICAÇÕES",
           removeEverything: "APAGAR TUDO",
           privacyPolicy: "Política de Privacidade",
           termsAndConditions: "Termos de Uso",
@@ -270,6 +272,7 @@ class MindMeTexts extends Translations {
           authReason: "Por favor autentique-se para ver esse lembrete!",
           authWriteYourCode: "Escreva o código de 4 digitos para ver esse lembrete",
           authIncorrectCode: "Código Incorreto",
+          authUnabled: "Não foi possível autenticá-lo",
           authIncompleteCode: "O código deve ter 4 digitos",
         }
       };

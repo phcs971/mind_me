@@ -47,9 +47,9 @@ class NoteModel {
         return MindMeTexts.notificationRandom.tr;
       else if (dates.every((i) => i))
         date = MindMeTexts.notificationEveryday.tr;
-      else if (dates[0] && dates[6])
+      else if (dates == [true, false, false, false, false, false, true])
         date = MindMeTexts.notificationWeekend.tr;
-      else if (dates.sublist(1, 6).every((i) => i))
+      else if (dates == [false, true, true, true, true, true, false])
         date = MindMeTexts.notificationWeekday.tr;
       else
         date = List<String>.generate(7, (i) => dates[i] ? datesString[i].tr : "")

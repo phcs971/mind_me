@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:local_auth/local_auth.dart';
 import 'package:mind_me/src/models/note.model.dart';
 import 'package:mind_me/src/stores/notes.store.dart';
+import 'package:mind_me/src/widgets/snackbar.widget.dart';
 
 import '../utils.dart';
 import 'navigation.service.dart';
@@ -20,6 +21,12 @@ class AuthService {
   }
 
   Future<bool> auth(NoteModel note) async {
+    log.i("<Auth> Is Supported: ${await localAuth.isDeviceSupported()}");
+    log.i("<Auth> Can Check Bio: ${await localAuth.canCheckBiometrics}");
+    log.i("<Auth> Available Bio: ${await localAuth.getAvailableBiometrics()}");
+    print("<Auth> Is Supported: ${await localAuth.isDeviceSupported()}");
+    print("<Auth> Can Check Bio: ${await localAuth.canCheckBiometrics}");
+    print("<Auth> Available Bio: ${await localAuth.getAvailableBiometrics()}");
     if (!note.lock) return true;
     if (!started) await init();
     try {
@@ -96,6 +103,7 @@ class AuthService {
             false;
       }
     } catch (e) {
+      SnackbarWidget.error(MindMeTexts.authUnabled.tr);
       return false;
     }
   }

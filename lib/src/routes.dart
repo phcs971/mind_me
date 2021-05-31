@@ -18,7 +18,7 @@ class MindMePages {
 
 Route<dynamic> onGenerateRoute(RouteSettings settings) {
   Route<dynamic> page(Widget widget) =>
-      MaterialPageRoute(builder: (_) => widget, settings: settings);
+      MaterialPageRoute(builder: (context) => widget, settings: settings);
 
   log.i('<Router> Routing to ${settings.name}');
 
