@@ -1,9 +1,6 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 
 import 'package:carbon_icons/carbon_icons.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:mind_me/src/stores/notes.store.dart';
 import 'package:mind_me/src/widgets/confirm.dialog.dart';
 import 'package:mind_me/src/widgets/snackbar.widget.dart';
@@ -122,20 +119,19 @@ class ConfigPage extends StatelessWidget {
               },
               builder: (_) => Icon(CarbonIcons.help, size: 32, color: Colors.black),
             ),
-            if (!Platform.isAndroid)
-              ListTileField(
-                title: MindMeTexts.buyMeACoffee.tr,
-                onTap: (_) async {
-                  try {
-                    log.i("<Config> Open BMC");
-                    await launch("https://buymeacoffee.com/phcs");
-                  } catch (e) {
-                    log.e("<Config> Open BMC Error $e");
-                  }
-                },
-                builder: (_) => SvgPicture.asset("assets/images/burger.svg",
-                    height: 32, width: 32, color: Colors.black),
-              ),
+            // ListTileField(
+            //   title: MindMeTexts.buyMeACoffee.tr,
+            //   onTap: (_) async {
+            //     try {
+            //       log.i("<Config> Open BMC");
+            //       await launch("https://buymeacoffee.com/phcs");
+            //     } catch (e) {
+            //       log.e("<Config> Open BMC Error $e");
+            //     }
+            //   },
+            //   builder: (_) => SvgPicture.asset("assets/images/burger.svg",
+            //       height: 32, width: 32, color: Colors.black),
+            // ),
             ListTileField(
               title: MindMeTexts.privacyPolicy.tr,
               onTap: (_) async {
