@@ -24,9 +24,6 @@ class AuthService {
     log.i("<Auth> Is Supported: ${await localAuth.isDeviceSupported()}");
     log.i("<Auth> Can Check Bio: ${await localAuth.canCheckBiometrics}");
     log.i("<Auth> Available Bio: ${await localAuth.getAvailableBiometrics()}");
-    print("<Auth> Is Supported: ${await localAuth.isDeviceSupported()}");
-    print("<Auth> Can Check Bio: ${await localAuth.canCheckBiometrics}");
-    print("<Auth> Available Bio: ${await localAuth.getAvailableBiometrics()}");
     if (!note.lock) return true;
     if (!started) await init();
     try {

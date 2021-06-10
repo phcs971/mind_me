@@ -1,7 +1,6 @@
 part of '../utils.dart';
 
 class MindMeStyles {
-  static AppLocalizations? get text => AppLocalizations.of(Get.context!);
   MindMeStyles._();
 
   static const fontFamily = "Chalkboard SE";
