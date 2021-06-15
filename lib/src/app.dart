@@ -26,10 +26,7 @@ class MindMeApp extends StatelessWidget {
           GlobalWidgetsLocalizations.delegate,
           GlobalMaterialLocalizations.delegate
         ],
-        supportedLocales: [
-          Locale('en'),
-          Locale('pt'),
-        ],
+        supportedLocales: MindMeTexts().keys.keys.map((k) => Locale(k)).toList(),
         theme: ThemeData(
           primaryColor: MindMeColors.yellow,
           accentColor: MindMeColors.orange,
